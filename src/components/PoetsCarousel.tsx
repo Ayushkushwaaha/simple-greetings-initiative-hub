@@ -8,6 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const poets = [
   {
@@ -84,11 +85,16 @@ const poets = [
 
 const PoetsCarousel = () => {
   return (
-    <section className="py-8 bg-gradient-to-r from-primary/5 to-secondary/5">
+    <section className="py-12 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">हिंदी साहित्य के प्रमुख हस्ताक्षर</h2>
-          <p className="text-gray-600">हिंदी साहित्य को समृद्ध करने वाले प्रतिष्ठित रचनाकार</p>
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-bold text-gray-900 mb-2 relative inline-block">
+            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              हिंदी साहित्य के प्रमुख हस्ताक्षर
+            </span>
+            <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></span>
+          </h2>
+          <p className="text-gray-600 mt-4">हिंदी साहित्य को समृद्ध करने वाले प्रतिष्ठित रचनाकार</p>
         </div>
 
         <Carousel
@@ -98,23 +104,24 @@ const PoetsCarousel = () => {
           }}
           className="w-full max-w-6xl mx-auto"
         >
-          <CarouselContent className="-ml-1">
+          <CarouselContent className="-ml-2 md:-ml-4">
             {poets.map((poet) => (
-              <CarouselItem key={poet.id} className="pl-1 md:basis-1/2 lg:basis-1/3">
+              <CarouselItem key={poet.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                 <div className="p-1">
-                  <Card className="overflow-hidden book-card">
+                  <Card className="overflow-hidden book-card border border-gray-200 hover:border-primary/30 transition-all duration-300">
                     <CardContent className="p-0 flex flex-col items-center">
-                      <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-100">
+                      <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-100 group">
                         <img
                           src={poet.image}
                           alt={poet.name}
-                          className="h-full w-full object-cover transition-all hover:scale-105 duration-300"
+                          className="h-full w-full object-cover transition-all group-hover:scale-110 duration-500 filter saturate-[0.9] group-hover:saturate-[1.1]"
                         />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <p className="absolute bottom-2 left-0 right-0 text-xs text-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">{poet.years}</p>
                       </div>
                       <div className="p-4 text-center bg-white w-full">
-                        <h3 className="font-bold text-lg mb-1">{poet.name}</h3>
-                        <p className="text-sm text-muted-foreground mb-1">{poet.famous_for}</p>
-                        <p className="text-xs text-gray-500">{poet.years}</p>
+                        <h3 className="font-bold text-lg mb-1 text-gray-900">{poet.name}</h3>
+                        <p className="text-sm text-primary/80">{poet.famous_for}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -122,9 +129,13 @@ const PoetsCarousel = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="hidden md:flex justify-end gap-2 mt-4">
-            <CarouselPrevious className="relative inset-0 translate-y-0 left-0" />
-            <CarouselNext className="relative inset-0 translate-y-0 right-0" />
+          <div className="flex justify-center gap-4 mt-6">
+            <CarouselPrevious className="relative left-auto translate-y-0 h-10 w-10 rounded-full border-2 border-primary/20 hover:border-primary/80 bg-white hover:bg-white">
+              <ChevronLeft className="h-6 w-6 text-primary" />
+            </CarouselPrevious>
+            <CarouselNext className="relative right-auto translate-y-0 h-10 w-10 rounded-full border-2 border-primary/20 hover:border-primary/80 bg-white hover:bg-white">
+              <ChevronRight className="h-6 w-6 text-primary" />
+            </CarouselNext>
           </div>
         </Carousel>
       </div>
