@@ -1,6 +1,7 @@
 
 import React from 'react';
 import Header from '@/components/Header';
+import PoetsCarousel from '@/components/PoetsCarousel';
 import Hero from '@/components/Hero';
 import FeaturedBooks from '@/components/FeaturedBooks';
 import Categories from '@/components/Categories';
@@ -12,6 +13,7 @@ const Index = () => {
     <div className="min-h-screen">
       <Header />
       <main>
+        <PoetsCarousel />
         <Hero />
         <FeaturedBooks />
         <Categories />
